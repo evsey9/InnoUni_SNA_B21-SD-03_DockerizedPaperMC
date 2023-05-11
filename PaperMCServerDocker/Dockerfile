@@ -21,7 +21,7 @@ RUN /getpaperserver.sh ${version}
 ############## Running environment #####################
 ########################################################
 FROM eclipse-temurin:17-jre AS runtime
-ARG TARGETARCH
+ARG TARGETARCH=amd64
 # Install gosu
 RUN set -eux; \
  apt-get update; \

@@ -1,14 +1,13 @@
-version: "1.0"
 services:
   minecraft:
-    image: "evsey/minecraft-papermc-server:latest"
+    image: "minecraft-papermc-server:latest"
     restart: always
     container_name: "mcserver"
     environment:
       MEMORYSIZE: "1G"
       PAPERMC_FLAGS: ""
     volumes:
-      - "/home/aidenrockwell/mcserver:/data:rw"
+      - "/home/evseyantonovich/mcserver:/data:rw"
     ports:
       - "25565:25565"
     # The following allow `docker attach minecraft` to work
