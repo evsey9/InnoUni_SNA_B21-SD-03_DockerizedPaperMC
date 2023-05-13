@@ -82,15 +82,15 @@ PAPERMC_FLAGS = --nojline
 
 Sets the command-line flags for PaperMC. Remove `--nojline` if you want to enable color and tab-completion for the server console.
 
-LOGGING_HOST: "172.17.0.1"
+LOGGING_HOST = 172.17.0.1
 
 Sets the IP of the logging server to send the logs to.
 
-LOGGING_PORT: "514"
+LOGGING_PORT = 514
 
 Sets the port of the logging server to send the logs to.
 
-LOGGING_PROTOCOL: "UDP"
+LOGGING_PROTOCOL = UDP
 
 Sets the protocol to use to sends logs to the logging server.
 
