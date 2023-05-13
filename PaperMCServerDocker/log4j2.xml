@@ -7,7 +7,7 @@
     <Syslog name="RFC5424" format="RFC5424" host="172.17.0.1" port="514"
           protocol="UDP" appName="mcserver" includeMDC="true"
           facility="USER" newLine="true"
-          messageId="info" id="mcserver"/>
+          messageId="warn" id="mcserver"/>
     <RollingFile name="rolling_server_log" fileName="logs/latest.log"
               filePattern="logs/server_%d{yyyy-MM-dd}.log">
           <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%level] %msg%n" />

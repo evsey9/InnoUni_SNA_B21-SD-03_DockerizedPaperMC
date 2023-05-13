@@ -19,7 +19,8 @@ $template $template jsonRfc5424Template,"{\"type\":\"syslog\",\"host\":\"%HOSTNA
 Create `/etc/rsyslog.d/30-mcserver.conf` and add the following lines to write any messages from `mcserver` to their own file:
 
 ```sh
-if $programname == 'mcserver' or $syslogtag == 'mcserver' then /var/log/mcserver/mcserver.log;
+if $programname == 'mcserver' or $syslogtag == 'mcserver' then /var/log/mcserver/mcserver.log
+& stop
 ```
 
 Create log directory, make sure port 514 is enabled on the firewall and restart rsyslog service:
