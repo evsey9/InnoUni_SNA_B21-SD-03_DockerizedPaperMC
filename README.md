@@ -32,3 +32,27 @@ $ sudo chmod 755 /var/log/mcserver
 $ sudo ufw allow 514/udp
 $ sudo service rsyslog restart
 ```
+
+Create `mcserver` in `/etc/logrotate.d` with the following contents for log rotation:
+
+```sh
+/var/log/mcserver/mcserver.log
+{
+	rotate 7
+	daily
+	missingok
+	notifempty
+	nocompress
+	sharedscripts
+}
+```
+
+Restart logrotate service:
+
+```sh
+$ sudo service logrotate restart
+```
+
+## Server setup
+
+Go to the PaperMCServerDocker folder and read the README.

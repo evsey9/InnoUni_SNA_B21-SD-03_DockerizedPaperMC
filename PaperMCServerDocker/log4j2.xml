@@ -4,8 +4,8 @@
     <Console name="STDOUT" target="SYSTEM_OUT">
           <PatternLayout pattern="%m%n"/>
     </Console>
-    <Syslog name="RFC5424" format="RFC5424" host="172.17.0.1" port="514"
-          protocol="UDP" appName="mcserver" includeMDC="true"
+    <Syslog name="RFC5424" format="RFC5424" host="${env:LOGGING_HOST:-172.17.0.1}" port="${env:LOGGING_PORT:-514}"
+          protocol="${env:LOGGING_PROTOCOL:-UDP}" appName="mcserver" includeMDC="true"
           facility="USER" newLine="true"
           messageId="warn" id="mcserver"/>
     <RollingFile name="rolling_server_log" fileName="logs/latest.log"

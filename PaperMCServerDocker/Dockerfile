@@ -66,6 +66,11 @@ WORKDIR /data
 COPY /docker-entrypoint.sh /opt/minecraft
 RUN chmod +x /opt/minecraft/docker-entrypoint.sh
 
+ENV LOGGING_HOST=172.17.0.1
+ENV LOGGING_PORT=514
+ENV LOGGING_PROTOCOL=UDP
+ENV TZ=Europe/Moscow
+
 COPY /log4j2.xml /opt/minecraft
 
 # Entrypoint

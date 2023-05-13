@@ -5,7 +5,11 @@ services:
     container_name: "mcserver"
     environment:
       MEMORYSIZE: "1G"
+      TZ: "Europe/Moscow"
       PAPERMC_FLAGS: ""
+      LOGGING_HOST: "172.17.0.1"
+      LOGGING_PORT: "514"
+      LOGGING_PROTOCOL: "UDP"
     volumes:
       - "/home/evseyantonovich/mcserver:/data:rw"
     ports:

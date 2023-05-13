@@ -24,4 +24,4 @@ if ! id "$DOCKER_USER" >/dev/null 2>&1; then
 fi
 
 export HOME=/home/$DOCKER_USER
-exec gosu $DOCKER_USER:$DOCKER_GROUP java -Dlog4j.configurationFile=/opt/minecraft/log4j2.xml -Dlog4j2.formatMsgNoLookups=true -Dlog4j2.debug=false -jar -Xms$MEMORYSIZE -Xmx$MEMORYSIZE $JAVAFLAGS /opt/minecraft/paperspigot.jar $PAPERMC_FLAGS nogui
+exec gosu $DOCKER_USER:$DOCKER_GROUP java -Dlog4j2.configurationFile=/opt/minecraft/log4j2.xml -Dlog4j2.formatMsgNoLookups=true -Dlog4j2.debug=false -jar -Xms$MEMORYSIZE -Xmx$MEMORYSIZE $JAVAFLAGS /opt/minecraft/paperspigot.jar $PAPERMC_FLAGS nogui
