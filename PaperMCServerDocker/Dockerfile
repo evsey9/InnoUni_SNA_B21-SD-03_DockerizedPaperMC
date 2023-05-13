@@ -66,6 +66,8 @@ WORKDIR /data
 COPY /docker-entrypoint.sh /opt/minecraft
 RUN chmod +x /opt/minecraft/docker-entrypoint.sh
 
+COPY /log4j2.xml /opt/minecraft
+
 # Entrypoint
 ENTRYPOINT ["/opt/minecraft/docker-entrypoint.sh"]
 
