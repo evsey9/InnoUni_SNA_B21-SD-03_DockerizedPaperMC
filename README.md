@@ -68,19 +68,19 @@ Create three basic scripts in the `mcserver_rsyslog_scripts` folder that will be
 `script1.sh`:
 ```sh
 #!/bin/bash
-echo "Pattern 1 detected!"
+echo "`date`: Pattern 1 (Ban) Detected!" >> /tmp/mcserver_patterns &
 ```
 
 `script2.sh`:
 ```sh  
 #!/bin/bash
-echo "Pattern 2 detected!"
+echo "`date`: Pattern 2 (Gamemode change) Detected!" >> /tmp/mcserver_patterns &
 ```
 
 `script3.sh`:
 ```sh  
 #!/bin/bash
-echo "Pattern 3 detected!"
+echo "`date`: Pattern 3 (Bad word in chat) Detected!" >> /tmp/mcserver_patterns &
 ```
 
 These scripts are very simple, and are there only to demonstrate the functionality of using rsyslog to execute external scripts upon passing a certain condition while receiving a logging event, simulating tripping some sort of security alarm, based on a pattern.
@@ -93,6 +93,38 @@ $ chmod 755 script1.sh
 $ chmod 755 script2.sh
 $ chmod 755 script3.sh
 ```
+
+After this, make sure that all the folders required to access the scripts can be accessed by everyone (in this case - the home directory and `mcserver_rsyslog_scripts`)
+
+Edit `/etc/rsyslog.d/30-mcserver.conf` so that it loads the `omprog` module and uses it to execute different scripts upon detecting a pattern in the log:
+
+```sh
+module(load="omprog")
+if ($programname == 'mcserver' or $syslogtag == 'mcserver') then { /var/log/mcserver/mcserver.log
+if ((not ($msg startswith '<')) and ($msg contains 'Banned')) then {
+action(type="omprog"
+        binary="/home/evseyantonovich/mcserver_rsyslog_scripts/script1.sh"
+        name="script1"
+        template="RSYSLOG_TraditionalFileFormat"
+        forceSingleInstance="on"
+        killUnresponsive="on") }
+if ((not ($msg startswith '<')) and ($msg contains 'Set own game mode')) then {
+action(type="omprog"
+        binary="/home/evseyantonovich/mcserver_rsyslog_scripts/script2.sh"
+        name="script2"
+        template="RSYSLOG_TraditionalFileFormat"
+        forceSingleInstance="on"
+        killUnresponsive="on") }
+if (($msg startswith '<') and ($msg contains 'bad word')) then {
+action(type="omprog"
+        binary="/home/evseyantonovich/mcserver_rsyslog_scripts/script3.sh"
+        name="script3"
+        template="RSYSLOG_TraditionalFileFormat"
+        forceSingleInstance="on"
+        killUnresponsive="on") }
+stop }
+```
+
 
 ## Server setup
 
