@@ -33,6 +33,8 @@ $ sudo ufw allow 514/udp
 $ sudo service rsyslog restart
 ```
 
+## Log rotation setup
+
 Create `mcserver` in `/etc/logrotate.d` with the following contents for log rotation:
 
 ```sh
@@ -51,6 +53,45 @@ Restart logrotate service:
 
 ```sh
 $ sudo service logrotate restart
+```
+
+## Setting up execution of scripts upon log event detection
+
+Create a directory to store the scripts that will be executed by rsyslog upon detecting certain patterns in log events (can be any folder):
+
+```sh
+$ mkdir /home/evseyantonovich/mcserver_rsyslog_scripts
+```
+
+Create three basic scripts in the `mcserver_rsyslog_scripts` folder that will be used to showcase the script execution by rsyslog, `script1.sh`, `script2.sh` and `script3.sh`:
+
+`script1.sh`:
+```sh
+#!/bin/bash
+echo "Pattern 1 detected!"
+```
+
+`script2.sh`:
+```sh  
+#!/bin/bash
+echo "Pattern 2 detected!"
+```
+
+`script3.sh`:
+```sh  
+#!/bin/bash
+echo "Pattern 3 detected!"
+```
+
+These scripts are very simple, and are there only to demonstrate the functionality of using rsyslog to execute external scripts upon passing a certain condition while receiving a logging event, simulating tripping some sort of security alarm, based on a pattern.
+
+Give everyone read/execute permissions for the scripts (change folder and script names as applicable):
+
+```sh
+$ cd /home/evseyantonovich/mcserver_rsyslog_scripts
+$ chmod 755 script1.sh
+$ chmod 755 script2.sh
+$ chmod 755 script3.sh
 ```
 
 ## Server setup
